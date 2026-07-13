@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корпоративні подарункові набори від «Могорич»</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Onest:wght@600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <!-- Intl-Tel-Input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID'); // ЗАМІНИТИ НА СВІЙ ID
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <style>
+        /* Global typography resets and application */
+        h1, h2 {
+            font-family: 'Onest', sans-serif !important;
+            font-size: 30px !important;
+            line-height: 34px !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+        }
+        h3 {
+            font-family: 'Onest', sans-serif !important;
+            font-size: 16px !important;
+            line-height: 19px !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+        }
+        p, span, div, li, summary, a, label {
+            font-family: 'Inter', sans-serif !important;
+        }
+        p {
+            font-size: 16px !important;
+            font-weight: 400 !important;
+        }
+        .text-secondary {
+            font-size: 14px !important;
+        }
+        
+        /* Global Colors */
+        body {
+            background-color: #FFFFFF;
+            color: #261815;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Section Spacing */
+        .section-margin {
+            margin-top: 60px !important;
+            margin-bottom: 60px !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        
+        /* Buttons */
+        .global-btn {
+            background-color: #261815 !important;
+            color: #FFFFFF !important;
+            border-radius: 10px !important;
+            text-transform: none !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 400 !important;
+            font-size: 16px !important;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .hero-btn {
+            background-color: #FFFFFF !important;
+            color: #261815 !important;
+            border-radius: 10px !important;
+        }
+
+        /* First Section */
+        .hero-section {
+            height: 100dvh;
+            padding-top: 60px;
+            padding-bottom: 20px;
+            margin-top: 0;
+            margin-bottom: 60px;
+            background-image: url('https://placehold.co/1920x1080/261815/FFFFFF?text=Hero+Background');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF; /* Or #261815 depending on image */
+        }
+        .hero-section * {
+            color: inherit;
+            text-align: center;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        /* Last Section */
+        .last-section {
+            margin-top: 60px;
+            margin-bottom: 0;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            background-color: #261815;
+            color: #FFFFFF;
+        }
+        .last-section * {
+            color: #FFFFFF;
+        }
+
+        /* Image Containers */
+        .img-container {
+            border-radius: 10px !important;
+            overflow: hidden !important;
+        }
+        img {
+            border-radius: 10px !important;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 639px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            min-width: 0;
+            gap: 12px;
+        }
+        .product-swiper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .product-swiper .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            aspect-ratio: 1/1;
+        }
+        
+        /* Swiper Overrides */
+        .swiper-button-next, .swiper-button-prev {
+            color: #FFFFFF !important;
+            background: rgba(38, 24, 21, 0.5);
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50%;
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 16px !important;
+        }
+        .swiper-pagination-bullet {
+            background: #FFFFFF !important;
+            opacity: 0.7;
+        }
+        .swiper-pagination-bullet-active {
+            background: #261815 !important;
+            opacity: 1;
+        }
+
+        /* Accordion / Dropdowns */
+        details {
+            border-bottom: 1px solid rgba(38, 24, 21, 0.2);
+            padding: 16px 0;
+        }
+        summary {
+            font-family: 'Onest', sans-serif !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        summary::after {
+            content: '+';
+            font-size: 20px;
+            font-weight: 400;
+        }
+        details[open] summary::after {
+            content: '-';
+        }
+        details p {
+            margin-top: 12px;
+        }
+
+        /* Logo Marquee */
+        .logo-marquee {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        .logo-marquee-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            gap: 20px;
+            animation: logo-marquee-scroll 30s linear infinite;
+            will-change: transform;
+        }
+        .logo-sequence {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 20px;
+        }
+        .logo-item {
+            flex: 0 0 auto;
+        }
+        .logo-item img {
+            display: block;
+            width: auto;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 0 !important; /* Exception for logos to not clip weirdly if transparent */
+        }
+        @keyframes logo-marquee-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-50% - 10px)); }
+        }
+
+        /* Form overrides */
+        .iti { width: 100%; }
+        .iti__flag-container { border-radius: 10px 0 0 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Блок 1. Перший екран -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Корпоративні подарункові набори від «Могорич»</h1>
+            <p class="mt-4 mb-8">Створіть момент радості для співробітників, партнерів чи клієнтів — з подарунком, який говорить більше, ніж стандартне “дякуємо”.<br>Зберемо готовий або індивідуальний набір під ваш бюджет, кількість отримувачів та привід.</p>
+            <button class="global-btn hero-btn" data-btn="Головний екран" onclick="openModal(this)">Переглянути набори</button>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4">
+        <!-- Блок 2. Для кого підійдуть подарунки -->
+        <section class="section-margin">
+            <h2 class="mb-4">Подарунки, які доречно вручити команді, партнерам чи клієнтам</h2>
+            <p class="mb-8">Корпоративний подарунок — це не просто приємний жест. Це спосіб подякувати, нагадати про бренд, підсилити враження після події або залишити теплий контакт із людьми, які важливі для вашої компанії.</p>
+            
+            <details>
+                <summary>Для співробітників</summary>
+                <p>Щоб подякувати команді за роботу, привітати зі святом або створити відчуття турботи всередині компанії.<br>
+                <span class="font-semibold">Підійде для:</span> Професійних свят, корпоративів, річниці компанії, мотиваційних подарунків, нового року, 8 березня, Великдень.</p>
+            </details>
+            <details>
+                <summary>Для партнерів</summary>
+                <p>Щоб залишити після співпраці не просто лист чи повідомлення, а фізичний подарунок, який асоціюється з увагою та повагою.<br>
+                <span class="font-semibold">Підійде для:</span> партнерських зустрічей, завершення проєкту, подяки за співпрацю, бізнес-переговорів.</p>
+            </details>
+            <details>
+                <summary>Для клієнтів</summary>
+                <p>Щоб нагадати про компанію, посилити лояльність і зробити комунікацію більш теплою.<br>
+                <span class="font-semibold">Підійде для:</span> постійних клієнтів, VIP-клієнтів, сезонних привітань, спеціальних подяк.</p>
+            </details>
+            <details>
+                <summary>Для гостей подій</summary>
+                <p>Подарунковий набір можна вручити після конференції, презентації, корпоративу або іншого заходу.<br>
+                <span class="font-semibold">Підійде для:</span> учасників події, спікерів, партнерів, запрошених гостей, дилерів.</p>
+            </details>
+            <details>
+                <summary>Для VIP-отримувачів</summary>
+                <p>Коли важливо підготувати подарунок, який виглядає більш статусно, персоналізовано та продумано.<br>
+                <span class="font-semibold">Підійде для:</span> керівників, ключових партнерів, топ клієнтів, важливих гостей.</p>
+            </details>
+        </section>
+
+        <!-- Блок 3. Для яких приводів -->
+        <section class="section-margin">
+            <h2 class="mb-4">Подарункові набори для будь-якої корпоративної нагоди</h2>
+            <p class="mb-8">Ми допоможемо підібрати подарунок під конкретний привід, формат вручення та кількість отримувачів.</p>
+            
+            <details>
+                <summary>Професійні свята</summary>
+                <p>Набори для привітання співробітників, партнерів або представників окремої галузі.</p>
+            </details>
+            <details>
+                <summary>День народження компанії</summary>
+                <p>Подарунки, які можна вручити команді, клієнтам або гостям святкової події.</p>
+            </details>
+            <details>
+                <summary>Корпоративи</summary>
+                <p>Готові набори для вручення під час корпоративного заходу або після нього.</p>
+            </details>
+            <details>
+                <summary>Конференції та презентації</summary>
+                <p>Компактні або преміальні подарунки для учасників, спікерів, партнерів та VIP-гостей.</p>
+            </details>
+            <details>
+                <summary>Подяка після співпраці</summary>
+                <p>Набір як знак уваги після завершення проєкту, сезону, угоди або важливої зустрічі.</p>
+            </details>
+        </section>
+
+        <!-- Блок 4. Набори -->
+        <section class="section-margin">
+            <h2 class="mb-4">Оберіть готовий набір або зберіть індивідуальний під вашу компанію</h2>
+            <p class="mb-8">Ми підготували кілька варіантів корпоративних подарунків, які можна адаптувати під ваш бюджет, кількість отримувачів та формат брендування.<br>Кожен набір можна прорахувати індивідуально — залежно від наповнення, пакування, кількості та додаткових побажань.</p>
+
+            <div class="products-grid">
+                <!-- Набір 1 -->
+                <div class="product-card">
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                    <h3>Набір «Смак традицій»</h3>
+                    <p class="text-secondary flex-grow">Що входить: Ковбаса домашня, асорті соління з настоянкою, перець гострий маринований, хрін, перцівка</p>
+                    <button class="global-btn w-full" data-btn="Набір 1" onclick="openModal(this)">Замовити набір</button>
+                </div>
+
+                <!-- Набір 2 -->
+                <div class="product-card">
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                    <h3>Набір «Щедра гостина»</h3>
+                    <p class="text-secondary flex-grow">Що входить: Буженина запечена, огірочки мариновані, перець гострий маринований, соус солодкий чилі, перцівка</p>
+                    <button class="global-btn w-full" data-btn="Набір 2" onclick="openModal(this)">Замовити набір</button>
+                </div>
+
+                <!-- Набір 3 -->
+                <div class="product-card">
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                    <h3>Набір «Домашні запаси»</h3>
+                    <p class="text-secondary flex-grow">Що входить: Огірочки мариновані, печериці мариновані, помідори чері мариновані, сливи мариновані, хреновуха, перцівка.</p>
+                    <button class="global-btn w-full" data-btn="Набір 3" onclick="openModal(this)">Замовити набір</button>
+                </div>
+
+                <!-- Набір 4 -->
+                <div class="product-card">
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                    <h3>Набір «До доброї вечері»</h3>
+                    <p class="text-secondary flex-grow">Що входить: Огірочки мариновані, печериці мариновані, помідори чері мариновані, вишнівка</p>
+                    <button class="global-btn w-full" data-btn="Набір 4" onclick="openModal(this)">Замовити набір</button>
+                </div>
+
+                <!-- Набір 5 -->
+                <div class="product-card">
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                    <h3>Набір «Особливий момент»</h3>
+                    <p class="text-secondary flex-grow">Що входить: Крафтові цукерки з вишнею та горішками «Могорич», вишнівка ручної роботи, свічка для затишку.</p>
+                    <button class="global-btn w-full" data-btn="Набір 5" onclick="openModal(this)">Замовити набір</button>
+                </div>
+
+                <!-- Набір 6 -->
+                <div class="product-card">
+                    <div class="swiper product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                    <h3>Набір «Домашнє тепло»</h3>
+                    <p class="text-secondary flex-grow">Що входить: Мед з горішками, чай травяний, конфітюр обліпиха з імбирем, конфітюр полуничний, конфітюр з черешні.</p>
+                    <button class="global-btn w-full" data-btn="Набір 6" onclick="openModal(this)">Замовити набір</button>
+                </div>
+            </div>
+
+            <!-- Крафтовий набір -->
+            <div class="mt-12 p-6 border border-[#261815] rounded-[10px]">
+                <h3 class="mb-4 text-xl">Крафтовий набір</h3>
+                <p class="mb-4">Ми готові зібрати індивідуальний подарунковий набір саме під вашу компанію.<br>Ви розповідаєте нам про привід, кількість отримувачів, бюджет, дедлайн і побажання до подарунка — а ми пропонуємо варіанти наповнення, пакування та брендування.</p>
+                <details>
+                    <summary>Можемо адаптувати</summary>
+                    <ul class="list-disc pl-5 mt-3 space-y-1">
+                        <li>склад набору;</li>
+                        <li>розмір подарунка;</li>
+                        <li>бюджет за 1 набір;</li>
+                        <li>стиль пакування;</li>
+                        <li>формат брендування;</li>
+                        <li>листівку або персональне побажання;</li>
+                        <li>наповнення для різних категорій отримувачів.</li>
+                    </ul>
+                </details>
+                <details class="mb-6 border-b-0">
+                    <summary>Підійде, якщо</summary>
+                    <ul class="list-disc pl-5 mt-3 space-y-1">
+                        <li>потрібен подарунок під конкретний бюджет;</li>
+                        <li>треба зробити набір у стилі компанії;</li>
+                        <li>подарунки потрібні для різних груп отримувачів;</li>
+                        <li>важливо підготувати щось нестандартне;</li>
+                        <li>потрібен подарунок під подію, сезон або корпоративний привід.</li>
+                    </ul>
+                </details>
+                <button class="global-btn" data-btn="Крафтовий" onclick="openModal(this)">Зібрати індивідуальний набір</button>
+            </div>
+        </section>
+
+        <!-- Блок 5. Подарунки наших гостей -->
+        <section class="section-margin">
+            <h2 class="mb-4">Більше, ніж набір</h2>
+            <p class="mb-8">Ми створюємо подарунки, які працюють не лише в момент вручення, а й після — коли людина відкриває коробку, дістає смаколики й перетворює подарунок на маленький приємний ритуал.<br>Саме тому такі набори запамʼятовують: вони дарують не формальність, а смак, атмосферу й відчуття уваги.</p>
+            
+            <div class="swiper product-swiper !h-[400px]">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                </div>
+                <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <!-- Блок 6. Брендування -->
+        <section class="section-margin">
+            <h2 class="mb-4">Брендуємо подарунки під вашу компанію</h2>
+            <p class="mb-8">Корпоративний подарунок має не просто виглядати красиво. Він має нагадувати про ваш бренд, цінності та увагу до людей, яким ви його даруєте.<br>Тому кожен набір можна адаптувати під вашу компанію: додати логотип, назву, корпоративні кольори, персональну листівку, брендоване пакування або інші деталі.</p>
+            
+            <div class="swiper product-swiper !h-[400px] mb-8">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                </div>
+                <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+            </div>
+            
+            <button class="global-btn" data-btn="Брендування" onclick="openModal(this)">Обговорити брендування</button>
+        </section>
+
+        <!-- Блок 7 -->
+        <section class="section-margin">
+            <h2 class="mb-4">Що може входити в подарунковий набір</h2>
+            <p class="mb-8">Ми можемо зібрати набір із готових фірмових позицій або підібрати індивідуальне наповнення під конкретну аудиторію.</p>
+            
+            <details>
+                <summary>Крафтові солодощі</summary>
+                <p>Цукерки, солодкі позиції, конфітюри, мед, доповнення до чаю або інші приємні гастрономічні деталі.</p>
+            </details>
+            <details>
+                <summary>Українські делікатеси</summary>
+                <p>Позиції з характером українського столу: м’ясні делікатеси, соуси, хрін, гірчиця та інші смачні доповнення.</p>
+            </details>
+            <details>
+                <summary>Домашні соління</summary>
+                <p>Огірки, томати, гриби, перець, овочеві асорті або інші фірмові позиції для гастрономічного набору.</p>
+            </details>
+            <details>
+                <summary>Напої та доповнення</summary>
+                <p>Можемо запропонувати наповнення під формат подарунка: чайні, кавові, безалкогольні або інші позиції за погодженням.</p>
+            </details>
+            <details>
+                <summary>Фірмове пакування</summary>
+                <p>Коробки, пакети, стрічки, бірки, наліпки, листівки та інші елементи, які створюють завершений вигляд подарунка.</p>
+            </details>
+            <details>
+                <summary>Індивідуальні деталі</summary>
+                <p>Персональні побажання, різні варіанти наборів для різних груп отримувачів, окреме пакування для VIP-подарунків.</p>
+            </details>
+        </section>
+
+        <!-- Блок 8 -->
+        <section class="section-margin">
+            <h2 class="mb-4">Від заявки до готових подарунків — усе зрозуміло й поетапно</h2>
+            <p class="mb-8">Ми не продаємо набори через кошик на сайті, тому що корпоративне замовлення майже завжди потребує уточнення деталей.<br>Після заявки ми зв’язуємося з вами, уточнюємо задачу та готуємо пропозицію.</p>
+            
+            <details class="mb-8 border-b border-[#261815]/20">
+                <summary>Як проходить замовлення?</summary>
+                <ol class="list-decimal pl-5 mt-4 space-y-4">
+                    <li><span class="font-semibold">Ви залишаєте заявку</span><br>Вказуєте кількість наборів, орієнтовний бюджет, привід і дату, до якої потрібні подарунки.</li>
+                    <li><span class="font-semibold">Ми уточнюємо задачу</span><br>Дізнаємося, для кого подарунки: співробітників, партнерів, клієнтів, VIP-гостей або учасників події.</li>
+                    <li><span class="font-semibold">Пропонуємо варіанти</span><br>Підбираємо готовий набір або пропонуємо індивідуальне наповнення під ваш бюджет.</li>
+                    <li><span class="font-semibold">Узгоджуємо брендування</span><br>Обговорюємо логотип, листівки, корпоративні кольори, пакування та інші деталі.</li>
+                    <li><span class="font-semibold">Готуємо прорахунок</span><br>Формуємо фінальну пропозицію з урахуванням кількості, складу набору, пакування та дедлайну.</li>
+                    <li><span class="font-semibold">Комплектуємо подарунки</span><br>Готуємо, пакуємо та перевіряємо набори перед передачею.</li>
+                    <li><span class="font-semibold">Передаємо готове замовлення або розсилаємо перевізником по всій Україні</span><br>Ви отримуєте готові подарунки для вручення співробітникам, клієнтам, партнерам чи гостям події в офіс, або ж розішлемо в потрібну точку по Україні.</li>
+                </ol>
+            </details>
+            
+            <button class="global-btn" data-btn="Заявка" onclick="openModal(this)">Залишити заявку</button>
+        </section>
+
+        <!-- Блок 9. Чому «Могорич» -->
+        <section class="section-margin">
+            <h2 class="mb-4">Чому компанії обирають подарункові набори від «Могорич»</h2>
+            <p class="mb-8">Ми створюємо не стандартні бокси “як у всіх”, а гастрономічні подарунки з характером, які можна адаптувати під вашу компанію, подію та аудиторію.</p>
+            
+            <details>
+                <summary>Власна кухня та фірмові продукти</summary>
+                <p>В основі наборів — гастрономічні позиції від «Могорич», які передають атмосферу гостинності та щедрого столу.</p>
+            </details>
+            <details>
+                <summary>Крафтовий підхід</summary>
+                <p>Кожен набір можна зібрати не шаблонно, а під конкретний привід, бюджет і отримувачів.</p>
+            </details>
+            <details>
+                <summary>Український гастрономічний характер</summary>
+                <p>Солодощі, соління, делікатеси та фірмові позиції створюють подарунок, який відрізняється від стандартних корпоративних сувенірів.</p>
+            </details>
+            <details>
+                <summary>Брендування під компанію</summary>
+                <p>Можемо додати логотип, назву, листівку, корпоративні кольори та індивідуальні деталі.</p>
+            </details>
+            <details>
+                <summary>Готові рішення та індивідуальні набори</summary>
+                <p>Можна обрати один із готових варіантів або зібрати повністю індивідуальний подарунок.</p>
+            </details>
+            <details>
+                <summary>Підбір під бюджет</summary>
+                <p>Ми враховуємо кількість отримувачів, бажаний бюджет за один набір і пропонуємо рішення, яке відповідає вашій задачі.</p>
+            </details>
+            <details>
+                <summary>Подарунки як частина події</summary>
+                <p>Набори можна підготувати для корпоративів, конференцій, презентацій, партнерських зустрічей або інших заходів.</p>
+            </details>
+        </section>
+        
+        <!-- БЛОК 10. Нам довіряють -->
+        <section class="section-margin">
+            <h2 class="mb-8">Нам довіряють</h2>
+            <div class="logo-marquee">
+                <div class="logo-marquee-track">
+                    <div class="logo-sequence">
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                    </div>
+                    <div class="logo-sequence" aria-hidden="true">
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                        <div class="logo-item"><img src="https://placehold.co/200x150" alt="Logo"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 11. FAQ -->
+        <section class="section-margin">
+            <h2 class="mb-8">Часті питання</h2>
+            
+            <details>
+                <summary>Чи можна купити набір одразу на сайті?</summary>
+                <p>Ні. Ми працюємо через заявку, тому що корпоративні подарунки зазвичай потребують індивідуального прорахунку: кількості, складу, бюджету, дедлайну та брендування.</p>
+            </details>
+            <details>
+                <summary>Чи можна замовити набір із логотипом компанії?</summary>
+                <p>Так. Ми можемо додати логотип, назву компанії, брендовану листівку, наліпку, бірку, печатки, корпоративні кольори або інші елементи оформлення.</p>
+            </details>
+            <details>
+                <summary>Чи можна зібрати індивідуальний набір?</summary>
+                <p>Так. Якщо готові варіанти вам не підходять, ми можемо зібрати крафтовий набір під вашу компанію, привід, бюджет і кількість отримувачів.</p>
+            </details>
+            <details>
+                <summary>Чи можна зробити різні набори для різних людей?</summary>
+                <p>Так. Наприклад, окремі подарунки для співробітників, партнерів, VIP-клієнтів або гостей події.</p>
+            </details>
+            <details>
+                <summary>Від чого залежить вартість набору?</summary>
+                <p>Вартість залежить від наповнення, кількості наборів, пакування, брендування та додаткових побажань.</p>
+            </details>
+            <details>
+                <summary>Чи можна підібрати набір під конкретний бюджет?</summary>
+                <p>Так. Ви можете вказати орієнтовний бюджет за один набір, а ми запропонуємо варіанти наповнення в межах цього бюджету.</p>
+            </details>
+            <details>
+                <summary>Скільки часу потрібно на підготовку замовлення?</summary>
+                <p>Термін залежить від кількості наборів, складності наповнення та брендування. Після заявки ми уточнимо деталі й зорієнтуємо вас по реальних строках.</p>
+            </details>
+            <details>
+                <summary>Чи можна додати персональну листівку?</summary>
+                <p>Так. Ми можемо додати листівку з вашим текстом, привітанням або персональним повідомленням для отримувачів.</p>
+            </details>
+            <details>
+                <summary>Чи можна замовити подарунки для події?</summary>
+                <p>Так. Ми можемо підготувати набори для корпоративу, конференції, презентації, партнерської зустрічі або іншого заходу.</p>
+            </details>
+        </section>
+    </div>
+
+    <!-- Блок 12. Фінальна заявка -->
+    <section class="last-section">
+        <div class="max-w-6xl mx-auto px-4 text-center flex flex-col items-center">
+            <h2 class="mb-4">Потрібні корпоративні подарунки? Підберемо набір під ваш бюджет і дедлайн</h2>
+            <p class="mb-8">Залиште заявку — ми уточнимо кількість, привід, бюджет, побажання до наповнення та підготуємо варіанти подарункових наборів для вашої компанії.</p>
+            
+            <div class="text-left bg-white/10 p-6 rounded-[10px] mb-8 w-full max-w-lg">
+                <p class="font-semibold mb-3">Що ви отримаєте після заявки:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>консультацію щодо вибору набору;</li>
+                    <li>підбір готового або індивідуального варіанту;</li>
+                    <li>пропозиції по наповненню;</li>
+                    <li>варіанти брендування;</li>
+                    <li>попередній прорахунок;</li>
+                    <li>розуміння строків підготовки.</li>
+                </ul>
+            </div>
+            
+            <button class="global-btn !bg-white !text-[#261815]" data-btn="Останній СТА" onclick="openModal(this)">Залишити заявку</button>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-white text-[#261815] py-8 border-t border-[#261815]/20">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6">
+            <div>
+                <p class="font-semibold mb-2">Соціальні мережі:</p>
+                <a href="#" class="hover:underline">Instagram: mogorich_ivent</a>
+            </div>
+            <div>
+                <p class="font-semibold mb-2">Наші контакти:</p>
+                <p>+38 068 131 60 63 (Юлія)</p>
+                <p>mogorich_yuliia@ukr.net</p>
+            </div>
+            <div>
+                <p class="font-semibold mb-2">Адреса:</p>
+                <p>Чернігівська область, Ніжинський район,<br>с. Вертіївка, вул. Київська, будинок 1</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Popup Modal -->
+    <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center hidden backdrop-blur-sm bg-black/60 transition-opacity duration-300 opacity-0">
+        <div class="bg-white rounded-[10px] p-8 w-full max-w-md relative transform scale-95 transition-transform duration-300" id="modalContent">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-[#261815] text-2xl leading-none">&times;</button>
+            
+            <!-- Form State -->
+            <div id="formState">
+                <h2 class="mb-6 text-center !text-2xl text-[#261815]">Введіть дані для доступу</h2>
+                <form id="leadForm" onsubmit="submitForm(event)" class="flex flex-col gap-4">
+                    <input type="hidden" id="btn_type" name="btn_type" value="">
+                    
+                    <div>
+                        <label class="block text-sm mb-1 text-[#261815]">Ім’я</label>
+                        <input type="text" id="name" required class="w-full h-[50px] border border-[#261815]/30 rounded-[10px] px-4 outline-none focus:border-[#261815] text-[#261815]">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm mb-1 text-[#261815]">Телефон</label>
+                        <input type="tel" id="phone" required class="w-full h-[50px] border border-[#261815]/30 rounded-[10px] px-4 outline-none focus:border-[#261815] text-[#261815]">
+                        <p id="phoneError" class="text-red-500 text-sm mt-1 hidden">Невірний формат номера</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm mb-1 text-[#261815]">Ваш запит</label>
+                        <textarea id="request" class="w-full h-[80px] border border-[#261815]/30 rounded-[10px] p-4 outline-none focus:border-[#261815] text-[#261815] resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="global-btn w-full mt-2">Отримати прорахунок</button>
+                </form>
+            </div>
+
+            <!-- Thank You State -->
+            <div id="thanksState" class="hidden text-center py-6">
+                <h2 class="mb-4 text-[#261815]">Дякуємо вам за заявку!</h2>
+                <p class="mb-6 text-[#261815]">Ми звʼяжемось з вами найближчим часом.<br><br>А поки ви можете перейти на наш інстаграм та познайомитися з нами детальніше.</p>
+                <a href="YOUR_BOT_LINK" class="global-btn w-full">Перейти в інстаграм</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></script> <!-- Required for tailwind to not strip it -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    
+    <script>
+        // === APP CONFIG ===
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_WEB_APP_URL';
+        
+        // === UTM PARSING ===
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmData = {
+            utm_source: urlParams.get('utm_source') || '',
+            utm_medium: urlParams.get('utm_medium') || '',
+            utm_campaign: urlParams.get('utm_campaign') || '',
+            utm_content: urlParams.get('utm_content') || '',
+            utm_term: urlParams.get('utm_term') || ''
+        };
+
+        // === SWIPER INITIALIZATION ===
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.product-swiper').forEach((slider) => {
+                new Swiper(slider, {
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    spaceBetween: 0,
+                    loop: false,
+                    navigation: {
+                        nextEl: slider.querySelector('.swiper-button-next'),
+                        prevEl: slider.querySelector('.swiper-button-prev'),
+                    },
+                    pagination: {
+                        el: slider.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                });
+            });
+        });
+
+        // === INTL-TEL-INPUT & GEOJS ===
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function(success, failure) {
+                fetch("https://get.geojs.io/v1/ip/country.json")
+                    .then(res => res.json())
+                    .then(data => success(data.country))
+                    .catch(() => success("ua"));
+            },
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+            preferredCountries: ["ua", "pl", "de"],
+        });
+
+        // === MODAL LOGIC ===
+        const modal = document.getElementById('leadModal');
+        const modalContent = document.getElementById('modalContent');
+        
+        function openModal(buttonElement) {
+            // Get which button was clicked
+            const btnType = buttonElement.getAttribute('data-btn') || 'Заявка';
+            document.getElementById('btn_type').value = btnType;
+            
+            // FB Pixel
+            if(typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
+            
+            // UI
+            document.getElementById('formState').classList.remove('hidden');
+            document.getElementById('thanksState').classList.add('hidden');
+            document.getElementById('phoneError').classList.add('hidden');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('leadForm').reset();
+            }, 300);
+        }
+
+        // === FORM SUBMISSION ===
+        async function submitForm(e) {
+            e.preventDefault();
+            const phoneError = document.getElementById('phoneError');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Validate Phone
+            if (!iti.isValidNumber()) {
+                phoneInput.classList.add('border-red-500');
+                phoneError.classList.remove('hidden');
+                return;
+            }
+            phoneInput.classList.remove('border-red-500');
+            phoneError.classList.add('hidden');
+
+            // Block Button
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Відправка...';
+            submitBtn.disabled = true;
+
+            // Prepare Data
+            const payload = {
+                date: new Date().toLocaleString("uk-UA", {timeZone: "Europe/Kiev"}),
+                name: document.getElementById('name').value,
+                phone: iti.getNumber(),
+                request: document.getElementById('request').value,
+                btn_type: document.getElementById('btn_type').value,
+                ...utmData
+            };
+
+            try {
+                // Send to Google Sheets
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Important for Google Script Web Apps
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Success FB Pixel
+                if(typeof fbq !== 'undefined') fbq('track', 'Lead');
+
+                // Show Thanks Screen
+                document.getElementById('formState').classList.add('hidden');
+                document.getElementById('thanksState').classList.remove('hidden');
+                
+            } catch (error) {
+                alert('Помилка відправки. Спробуйте ще раз.');
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
