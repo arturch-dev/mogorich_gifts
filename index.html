@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корпоративні подарункові набори від «Могорич»</title>
     
+    <!-- ОПТИМІЗАЦІЯ: Preload для головного фонового зображення (найшвидший LCP) -->
+    <link rel="preload" as="image" href="Hero_background.jpg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,10 +160,10 @@
         }
         .menu-logo img {
             display: block;
-            width: 71px;
-            height: 40px;
+            width: 71px !important;
+            height: 40px !important;
             object-fit: contain;
-            object-position: center;
+            object-position: left center;
         }
         .desktop-navigation {
             display: flex;
@@ -218,13 +221,25 @@
             background-color: transparent;
             cursor: pointer;
         }
+        /* Анімація Бургер -> Хрестик */
         .burger-button span {
             display: block;
             width: 20px;
             height: 2px;
             background-color: #261815;
             border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
+        .burger-button[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .burger-button[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-button[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+        
         .mobile-navigation {
             display: none;
             position: absolute;
@@ -252,9 +267,20 @@
             text-align: left;
             border-radius: 10px;
         }
+        
+        /* Логіка та центрювання кнопки в мобільній версії */
         @media (max-width: 767px) {
+            .site-navigation {
+                position: relative;
+            }
             .desktop-navigation { display: none; }
             .burger-button { display: inline-flex; }
+            .menu-order-button {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+            }
         }
 
         /* First Section */
@@ -262,7 +288,7 @@
             height: 100dvh;
             padding-top: 60px;
             padding-bottom: 20px;
-            margin-top: -80px; /* Offset for header to ensure full screen */
+            margin-top: -80px;
             margin-bottom: 60px;
             background-image: url('Hero_background.jpg');
             background-size: cover;
@@ -300,7 +326,6 @@
             padding-top: 60px;
             padding-bottom: 60px;
             background-color: transparent !important;
-            background-image: url("CTA_background.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -315,6 +340,11 @@
         }
         .last-section * {
             color: #FFFFFF;
+        }
+        
+        /* Клас для лінивого завантаження фону */
+        .lazy-bg {
+            background-image: none !important;
         }
 
         /* Footer */
@@ -447,7 +477,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            padding: 10px;
+            padding: 10px 20px; /* Оновлений відступ */
             border-radius: 10px;
             background-color: rgba(38, 24, 21, 0.8);
         }
@@ -513,6 +543,9 @@
         .dark-accordion details[open] > summary::after {
             background-image: url("Arrowopen.jpg");
         }
+        .dark-accordion details > p {
+            padding-top: 8px; /* Доданий відступ перед текстом */
+        }
 
         /* FAQ Accordion (Exception) */
         .faq-section details {
@@ -551,6 +584,9 @@
         }
         .faq-section details[open] > summary::after {
             background-image: url("Arrowopen_brown.jpg");
+        }
+        .faq-section details > p {
+            padding-top: 8px; /* Доданий відступ перед текстом FAQ */
         }
 
         /* Logo Marquee */
@@ -599,7 +635,7 @@
     <header class="site-header">
         <div class="site-navigation max-w-6xl mx-auto px-4">
             <a href="#page-top" class="menu-logo" aria-label="Перейти на початок сторінки">
-                <img src="logoMI.jpg" alt="Могорич">
+                <img src="logo_MI.jpg" alt="Могорич" width="71" height="40" style="display: block; width: 71px; height: 40px; object-fit: contain;">
             </a>
 
             <nav class="desktop-navigation" aria-label="Основна навігація">
@@ -730,9 +766,9 @@
                 <div class="product-card">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
                         </div>
                         <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
                     </div>
@@ -746,9 +782,9 @@
                 <div class="product-card">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
                         </div>
                         <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
                     </div>
@@ -762,9 +798,9 @@
                 <div class="product-card">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
                         </div>
                         <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
                     </div>
@@ -778,9 +814,9 @@
                 <div class="product-card">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
                         </div>
                         <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
                     </div>
@@ -794,9 +830,9 @@
                 <div class="product-card">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
                         </div>
                         <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
                     </div>
@@ -810,9 +846,9 @@
                 <div class="product-card">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
-                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
+                            <div class="swiper-slide"><img src="https://placehold.co/400x400" alt="Фото" loading="lazy" decoding="async"></div>
                         </div>
                         <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
                     </div>
@@ -865,12 +901,12 @@
             
             <div class="swiper product-swiper !h-[400px]">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
             </div>
@@ -883,13 +919,13 @@
             
             <div class="swiper product-swiper !h-[400px] mb-8">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x400" alt="Фото" class="!h-[400px]" loading="lazy" decoding="async"></div>
                 </div>
                 <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
             </div>
@@ -996,24 +1032,24 @@
             <div class="logo-marquee">
                 <div class="logo-marquee-track">
                     <div class="logo-sequence">
-                        <div class="logo-item"><img src="Astra.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="Kernel.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="ava.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="basf.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="btu.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="corteva.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="valena agro.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="vnic.jpg" alt="Logo"></div>
+                        <div class="logo-item"><img src="Astra.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="Kernel.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="ava.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="basf.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="btu.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="corteva.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="valena agro.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="vnic.jpg" alt="Logo" loading="lazy" decoding="async"></div>
                     </div>
                     <div class="logo-sequence" aria-hidden="true">
-                        <div class="logo-item"><img src="Astra.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="Kernel.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="ava.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="basf.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="btu.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="corteva.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="valena agro.jpg" alt="Logo"></div>
-                        <div class="logo-item"><img src="vnic.jpg" alt="Logo"></div>
+                        <div class="logo-item"><img src="Astra.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="Kernel.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="ava.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="basf.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="btu.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="corteva.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="valena agro.jpg" alt="Logo" loading="lazy" decoding="async"></div>
+                        <div class="logo-item"><img src="vnic.jpg" alt="Logo" loading="lazy" decoding="async"></div>
                     </div>
                 </div>
             </div>
@@ -1063,7 +1099,8 @@
     </div>
 
     <!-- Блок 12. Фінальна заявка -->
-    <section class="last-section">
+    <!-- ОПТИМІЗАЦІЯ: Ліниве завантаження фону -->
+    <section class="last-section lazy-bg" data-bg="CTA_background.jpg">
         <div class="max-w-6xl mx-auto px-4 text-center flex flex-col items-center">
             <h2 class="mb-4">Потрібні корпоративні подарунки? Підберемо набір під ваш бюджет і дедлайн</h2>
             <p class="mb-8">Залиште заявку — ми уточнимо кількість, привід, бюджет, побажання до наповнення та підготуємо варіанти подарункових наборів для вашої компанії.</p>
@@ -1102,7 +1139,8 @@
             </div>
         </div>
         <div class="footer-logo">
-            <img src="logo_footer.png" alt="Могорич">
+            <!-- ОПТИМІЗАЦІЯ: Lazy load для лого у футері -->
+            <img src="logo_footer.png" alt="Могорич" loading="lazy" decoding="async">
         </div>
     </footer>
 
@@ -1152,6 +1190,26 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     
     <script>
+        // === LAZY LOAD BACKGROUNDS (Оптимізація Performance) ===
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyBackgrounds = document.querySelectorAll(".lazy-bg");
+            if ("IntersectionObserver" in window) {
+                let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyBackground = entry.target;
+                            lazyBackground.style.backgroundImage = "url('" + lazyBackground.getAttribute("data-bg") + "')";
+                            lazyBackground.classList.remove("lazy-bg");
+                            lazyBackgroundObserver.unobserve(lazyBackground);
+                        }
+                    });
+                });
+                lazyBackgrounds.forEach(function(lazyBackground) {
+                    lazyBackgroundObserver.observe(lazyBackground);
+                });
+            }
+        });
+
         // === PRICE LOGIC (A/B Testing) ===
         document.addEventListener('DOMContentLoaded', () => {
             const isPriceMode = window.location.search.includes('price=true') || window.location.pathname.endsWith('/price');
@@ -1160,20 +1218,24 @@
             }
         });
 
-        // === MOBILE MENU LOGIC ===
+        // === MOBILE MENU LOGIC (Анімація Хрестика & Відкриття) ===
         const burgerButton = document.querySelector(".burger-button");
         const mobileNavigation = document.querySelector(".mobile-navigation");
         const siteNavigation = document.querySelector(".site-navigation");
 
         function closeMobileMenu() {
             if(mobileNavigation) mobileNavigation.classList.remove("is-open");
-            if(burgerButton) burgerButton.setAttribute("aria-expanded", "false");
+            if(burgerButton) {
+                burgerButton.setAttribute("aria-expanded", "false");
+                burgerButton.setAttribute("aria-label", "Відкрити меню");
+            }
         }
 
         if(burgerButton) {
             burgerButton.addEventListener("click", () => {
                 const isOpen = mobileNavigation.classList.toggle("is-open");
                 burgerButton.setAttribute("aria-expanded", String(isOpen));
+                burgerButton.setAttribute("aria-label", isOpen ? "Закрити меню" : "Відкрити меню");
             });
         }
 
