@@ -37,6 +37,8 @@
 
     <style>
         /* Global typography resets and application */
+        html { scroll-behavior: smooth; }
+        
         h1, h2 {
             font-family: 'Onest', sans-serif !important;
             font-size: 30px !important;
@@ -71,12 +73,30 @@
             overflow-x: hidden;
         }
         
-        /* Section Spacing */
+        /* Global override for specific margin */
+        p.mb-8 {
+            margin-bottom: 40px !important;
+        }
+
+        /* Section Spacing & Anchors */
         .section-margin {
             margin-top: 60px !important;
             margin-bottom: 60px !important;
-            padding-top: 0 !important;
             padding-bottom: 0 !important;
+        }
+        .shared-section {
+            padding-top: 60px !important;
+        }
+        .shared-section > h2 {
+            text-align: center;
+        }
+        .shared-section > h2 + p {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #page-top, #gift-sets, #branding, #why-mogorich, #trusted {
+            scroll-margin-top: 120px;
         }
         
         /* Buttons */
@@ -102,21 +122,156 @@
             color: #261815 !important;
             border-radius: 10px !important;
         }
+        
+        .full-width-cta {
+            width: 100% !important;
+            max-width: none !important;
+            display: block !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Sticky Header Navigation */
+        .site-header {
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            width: 100%;
+        }
+        .site-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            background-color: #FFFFFF;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .menu-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+        .menu-logo img {
+            display: block;
+            width: 71px;
+            height: 40px;
+            object-fit: contain;
+            object-position: center;
+        }
+        .desktop-navigation {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .menu-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            color: #261815;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .menu-link:hover,
+        .menu-link:focus-visible {
+            color: #261815;
+            text-decoration: underline;
+        }
+        .menu-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-order-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            width: auto;
+            max-width: none;
+            background-color: #261815;
+            color: #FFFFFF;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .burger-button {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex: 0 0 40px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            border-radius: 10px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .burger-button span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: #261815;
+            border-radius: 2px;
+        }
+        .mobile-navigation {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 16px;
+            right: 16px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            padding: 10px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .mobile-navigation.is-open {
+            display: flex;
+        }
+        .mobile-navigation .menu-link {
+            width: 100%;
+            justify-content: flex-start;
+            padding: 10px;
+            background: transparent;
+            color: #261815;
+            text-align: left;
+            border-radius: 10px;
+        }
+        @media (max-width: 767px) {
+            .desktop-navigation { display: none; }
+            .burger-button { display: inline-flex; }
+        }
 
         /* First Section */
         .hero-section {
             height: 100dvh;
             padding-top: 60px;
             padding-bottom: 20px;
-            margin-top: 0;
+            margin-top: -80px; /* Offset for header to ensure full screen */
             margin-bottom: 60px;
-            background-image: url('https://placehold.co/1920x1080/261815/FFFFFF?text=Hero+Background');
+            background-image: url('Hero_background.jpg');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #FFFFFF; /* Or #261815 depending on image */
+            color: #FFFFFF;
         }
         .hero-section * {
             color: inherit;
@@ -131,6 +286,12 @@
             max-width: 800px;
             padding: 0 20px;
         }
+        .hero-gift-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
 
         /* Last Section */
         .last-section {
@@ -138,11 +299,76 @@
             margin-bottom: 0;
             padding-top: 60px;
             padding-bottom: 60px;
-            background-color: #261815;
+            background-color: transparent !important;
+            background-image: url("CTA_background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            overflow: hidden;
             color: #FFFFFF;
+        }
+        .last-section::before,
+        .last-section::after {
+            content: none !important;
+            display: none !important;
         }
         .last-section * {
             color: #FFFFFF;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: 60px;
+            padding-top: 32px;
+            padding-bottom: 32px;
+            background-color: #261815;
+            color: #FFFFFF;
+            text-align: center;
+        }
+        .site-footer a,
+        .site-footer a:hover,
+        .site-footer a:focus,
+        .site-footer a:active,
+        .site-footer a:visited {
+            color: #FFFFFF;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .footer-content > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .footer-logo img {
+            display: block;
+            width: auto;
+            height: 200px;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center;
         }
 
         /* Image Containers */
@@ -158,12 +384,12 @@
         .products-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
+            gap: 40px;
         }
         @media (max-width: 639px) {
             .products-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 40px;
             }
         }
         .product-card {
@@ -172,6 +398,10 @@
             width: 100%;
             min-width: 0;
             gap: 12px;
+        }
+        .product-card > h3,
+        .product-card > p.text-secondary {
+            text-align: center;
         }
         .product-swiper {
             width: 100%;
@@ -207,34 +437,120 @@
             opacity: 1;
         }
 
-        /* Accordion / Dropdowns */
+        /* Shared Details Basis */
         details {
-            border-bottom: 1px solid rgba(38, 24, 21, 0.2);
             padding: 16px 0;
         }
-        summary {
+        
+        /* Dark Accordion */
+        .dark-accordion {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgba(38, 24, 21, 0.8);
+        }
+        .dark-accordion details,
+        .dark-accordion summary,
+        .dark-accordion details[open],
+        .dark-accordion details[open] > summary,
+        .dark-accordion details > p,
+        .dark-accordion details > ul,
+        .dark-accordion details > ol,
+        .dark-accordion details li {
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        .dark-accordion,
+        .dark-accordion summary,
+        .dark-accordion p,
+        .dark-accordion ul,
+        .dark-accordion ol,
+        .dark-accordion li,
+        .dark-accordion span {
+            color: #FFFFFF !important;
+        }
+        .dark-accordion details {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark-accordion details:last-child {
+            border-bottom: none;
+        }
+        .dark-accordion summary {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            cursor: pointer;
+            list-style: none;
+            font-family: 'Onest', sans-serif !important;
+            font-size: 16px !important;
+            line-height: 19px !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+        }
+        .dark-accordion .accordion-title {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+        .dark-accordion summary::-webkit-details-marker {
+            display: none;
+        }
+        .dark-accordion summary::after {
+            content: "";
+            display: block;
+            flex: 0 0 16px;
+            width: 16px;
+            height: 16px;
+            background-image: url("Arrowclose.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+        .dark-accordion details[open] > summary::after {
+            background-image: url("Arrowopen.jpg");
+        }
+
+        /* FAQ Accordion (Exception) */
+        .faq-section details {
+            border-bottom: 1px solid rgba(38, 24, 21, 0.2);
+        }
+        .faq-section summary {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            cursor: pointer;
+            list-style: none;
             font-family: 'Onest', sans-serif !important;
             font-size: 16px !important;
             font-weight: 600 !important;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
-        summary::-webkit-details-marker {
+        .faq-section .faq-question {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+        .faq-section summary::-webkit-details-marker {
             display: none;
         }
-        summary::after {
-            content: '+';
-            font-size: 20px;
-            font-weight: 400;
+        .faq-section summary::after {
+            content: "";
+            display: block;
+            flex: 0 0 16px;
+            width: 16px;
+            height: 16px;
+            background-image: url("Arrowclose_brown.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
         }
-        details[open] summary::after {
-            content: '-';
-        }
-        details p {
-            margin-top: 12px;
+        .faq-section details[open] > summary::after {
+            background-image: url("Arrowopen_brown.jpg");
         }
 
         /* Logo Marquee */
@@ -265,7 +581,7 @@
             width: auto;
             height: 150px;
             object-fit: contain;
-            border-radius: 0 !important; /* Exception for logos to not clip weirdly if transparent */
+            border-radius: 0 !important;
         }
         @keyframes logo-marquee-scroll {
             from { transform: translateX(0); }
@@ -277,79 +593,135 @@
         .iti__flag-container { border-radius: 10px 0 0 10px; }
     </style>
 </head>
-<body>
+<body id="page-top">
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="site-navigation max-w-6xl mx-auto px-4">
+            <a href="#page-top" class="menu-logo" aria-label="Перейти на початок сторінки">
+                <img src="logoMI.jpg" alt="Могорич">
+            </a>
+
+            <nav class="desktop-navigation" aria-label="Основна навігація">
+                <a href="#page-top" class="menu-link">Головна</a>
+                <a href="#gift-sets" class="menu-link">Подарункові набори</a>
+                <a href="#branding" class="menu-link">Брендування</a>
+                <a href="#why-mogorich" class="menu-link">Чому Могорич?</a>
+                <a href="#trusted" class="menu-link">Нам довіряють</a>
+            </nav>
+
+            <div class="menu-actions">
+                <button
+                    type="button"
+                    class="global-btn menu-order-button"
+                    data-btn="Замовити набір"
+                    onclick="openModal(this)"
+                >
+                    Замовити набір
+                </button>
+
+                <button
+                    type="button"
+                    class="burger-button"
+                    aria-label="Відкрити меню"
+                    aria-controls="mobile-navigation"
+                    aria-expanded="false"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <nav
+                id="mobile-navigation"
+                class="mobile-navigation"
+                aria-label="Мобільна навігація"
+            >
+                <a href="#page-top" class="menu-link">Головна</a>
+                <a href="#gift-sets" class="menu-link">Подарункові набори</a>
+                <a href="#branding" class="menu-link">Брендування</a>
+                <a href="#why-mogorich" class="menu-link">Чому Могорич?</a>
+                <a href="#trusted" class="menu-link">Нам довіряють</a>
+            </nav>
+        </div>
+    </header>
 
     <!-- Блок 1. Перший екран -->
     <section class="hero-section">
         <div class="hero-content">
             <h1>Корпоративні подарункові набори від «Могорич»</h1>
             <p class="mt-4 mb-8">Створіть момент радості для співробітників, партнерів чи клієнтів — з подарунком, який говорить більше, ніж стандартне “дякуємо”.<br>Зберемо готовий або індивідуальний набір під ваш бюджет, кількість отримувачів та привід.</p>
-            <button class="global-btn hero-btn" data-btn="Головний екран" onclick="openModal(this)">Переглянути набори</button>
+            <a href="#gift-sets" class="global-btn hero-btn hero-gift-link">Переглянути набори</a>
         </div>
     </section>
 
     <div class="max-w-6xl mx-auto px-4">
         <!-- Блок 2. Для кого підійдуть подарунки -->
-        <section class="section-margin">
+        <section class="section-margin shared-section">
             <h2 class="mb-4">Подарунки, які доречно вручити команді, партнерам чи клієнтам</h2>
             <p class="mb-8">Корпоративний подарунок — це не просто приємний жест. Це спосіб подякувати, нагадати про бренд, підсилити враження після події або залишити теплий контакт із людьми, які важливі для вашої компанії.</p>
             
-            <details>
-                <summary>Для співробітників</summary>
-                <p>Щоб подякувати команді за роботу, привітати зі святом або створити відчуття турботи всередині компанії.<br>
-                <span class="font-semibold">Підійде для:</span> Професійних свят, корпоративів, річниці компанії, мотиваційних подарунків, нового року, 8 березня, Великдень.</p>
-            </details>
-            <details>
-                <summary>Для партнерів</summary>
-                <p>Щоб залишити після співпраці не просто лист чи повідомлення, а фізичний подарунок, який асоціюється з увагою та повагою.<br>
-                <span class="font-semibold">Підійде для:</span> партнерських зустрічей, завершення проєкту, подяки за співпрацю, бізнес-переговорів.</p>
-            </details>
-            <details>
-                <summary>Для клієнтів</summary>
-                <p>Щоб нагадати про компанію, посилити лояльність і зробити комунікацію більш теплою.<br>
-                <span class="font-semibold">Підійде для:</span> постійних клієнтів, VIP-клієнтів, сезонних привітань, спеціальних подяк.</p>
-            </details>
-            <details>
-                <summary>Для гостей подій</summary>
-                <p>Подарунковий набір можна вручити після конференції, презентації, корпоративу або іншого заходу.<br>
-                <span class="font-semibold">Підійде для:</span> учасників події, спікерів, партнерів, запрошених гостей, дилерів.</p>
-            </details>
-            <details>
-                <summary>Для VIP-отримувачів</summary>
-                <p>Коли важливо підготувати подарунок, який виглядає більш статусно, персоналізовано та продумано.<br>
-                <span class="font-semibold">Підійде для:</span> керівників, ключових партнерів, топ клієнтів, важливих гостей.</p>
-            </details>
+            <div class="dark-accordion">
+                <details>
+                    <summary><span class="accordion-title">Для співробітників</span></summary>
+                    <p>Щоб подякувати команді за роботу, привітати зі святом або створити відчуття турботи всередині компанії.<br>
+                    <span class="font-semibold">Підійде для:</span> Професійних свят, корпоративів, річниці компанії, мотиваційних подарунків, нового року, 8 березня, Великдень.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Для партнерів</span></summary>
+                    <p>Щоб залишити після співпраці не просто лист чи повідомлення, а фізичний подарунок, який асоціюється з увагою та повагою.<br>
+                    <span class="font-semibold">Підійде для:</span> партнерських зустрічей, завершення проєкту, подяки за співпрацю, бізнес-переговорів.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Для клієнтів</span></summary>
+                    <p>Щоб нагадати про компанію, посилити лояльність і зробити комунікацію більш теплою.<br>
+                    <span class="font-semibold">Підійде для:</span> постійних клієнтів, VIP-клієнтів, сезонних привітань, спеціальних подяк.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Для гостей подій</span></summary>
+                    <p>Подарунковий набір можна вручити після конференції, презентації, корпоративу або іншого заходу.<br>
+                    <span class="font-semibold">Підійде для:</span> учасників події, спікерів, партнерів, запрошених гостей, дилерів.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Для VIP-отримувачів</span></summary>
+                    <p>Коли важливо підготувати подарунок, який виглядає більш статусно, персоналізовано та продумано.<br>
+                    <span class="font-semibold">Підійде для:</span> керівників, ключових партнерів, топ клієнтів, важливих гостей.</p>
+                </details>
+            </div>
         </section>
 
         <!-- Блок 3. Для яких приводів -->
-        <section class="section-margin">
+        <section class="section-margin shared-section">
             <h2 class="mb-4">Подарункові набори для будь-якої корпоративної нагоди</h2>
             <p class="mb-8">Ми допоможемо підібрати подарунок під конкретний привід, формат вручення та кількість отримувачів.</p>
             
-            <details>
-                <summary>Професійні свята</summary>
-                <p>Набори для привітання співробітників, партнерів або представників окремої галузі.</p>
-            </details>
-            <details>
-                <summary>День народження компанії</summary>
-                <p>Подарунки, які можна вручити команді, клієнтам або гостям святкової події.</p>
-            </details>
-            <details>
-                <summary>Корпоративи</summary>
-                <p>Готові набори для вручення під час корпоративного заходу або після нього.</p>
-            </details>
-            <details>
-                <summary>Конференції та презентації</summary>
-                <p>Компактні або преміальні подарунки для учасників, спікерів, партнерів та VIP-гостей.</p>
-            </details>
-            <details>
-                <summary>Подяка після співпраці</summary>
-                <p>Набір як знак уваги після завершення проєкту, сезону, угоди або важливої зустрічі.</p>
-            </details>
+            <div class="dark-accordion">
+                <details>
+                    <summary><span class="accordion-title">Професійні свята</span></summary>
+                    <p>Набори для привітання співробітників, партнерів або представників окремої галузі.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">День народження компанії</span></summary>
+                    <p>Подарунки, які можна вручити команді, клієнтам або гостям святкової події.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Корпоративи</span></summary>
+                    <p>Готові набори для вручення під час корпоративного заходу або після нього.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Конференції та презентації</span></summary>
+                    <p>Компактні або преміальні подарунки для учасників, спікерів, партнерів та VIP-гостей.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Подяка після співпраці</span></summary>
+                    <p>Набір як знак уваги після завершення проєкту, сезону, угоди або важливої зустрічі.</p>
+                </details>
+            </div>
         </section>
 
         <!-- Блок 4. Набори -->
-        <section class="section-margin">
+        <section id="gift-sets" class="section-margin shared-section">
             <h2 class="mb-4">Оберіть готовий набір або зберіть індивідуальний під вашу компанію</h2>
             <p class="mb-8">Ми підготували кілька варіантів корпоративних подарунків, які можна адаптувати під ваш бюджет, кількість отримувачів та формат брендування.<br>Кожен набір можна прорахувати індивідуально — залежно від наповнення, пакування, кількості та додаткових побажань.</p>
 
@@ -366,6 +738,7 @@
                     </div>
                     <h3>Набір «Смак традицій»</h3>
                     <p class="text-secondary flex-grow">Що входить: Ковбаса домашня 400г, асорті соління з настоянкою 300/400мл, перець гострий маринований 150/500мл, хрін 100г, настоянка власного виробництва Перцівка 500мл</p>
+                    <div class="product-price text-center font-bold text-xl mb-1 hidden">1 860 грн</div>
                     <button class="global-btn w-full" data-btn="Набір 1" onclick="openModal(this)">Замовити набір</button>
                 </div>
 
@@ -381,6 +754,7 @@
                     </div>
                     <h3>Набір «Щедра гостина»</h3>
                     <p class="text-secondary flex-grow">Що входить: Буженина запечена 300г, огірочки мариновані 200/400мл, перець гострий маринований 30/100мл, соус солодкий чилі 300мл, настоянка власного виробництва Перцівка 200мл</p>
+                    <div class="product-price text-center font-bold text-xl mb-1 hidden">1 150 грн</div>
                     <button class="global-btn w-full" data-btn="Набір 2" onclick="openModal(this)">Замовити набір</button>
                 </div>
 
@@ -396,6 +770,7 @@
                     </div>
                     <h3>Набір «Домашні запаси»</h3>
                     <p class="text-secondary flex-grow">Що входить: Огірочки мариновані 200/400мл, печериці мариновані250/400мл, помідори чері мариновані 250/400мл, сливи мариновані 200/400мл, настоянка власного виробництва хреновуха 100мл, настоянка власного виробництва перцівка 100мл</p>
+                    <div class="product-price text-center font-bold text-xl mb-1 hidden">1 460 грн</div>
                     <button class="global-btn w-full" data-btn="Набір 3" onclick="openModal(this)">Замовити набір</button>
                 </div>
 
@@ -411,6 +786,7 @@
                     </div>
                     <h3>Набір «До доброї вечері»</h3>
                     <p class="text-secondary flex-grow">Що входить: Огірочки мариновані 200/400мл, печериці мариновані 250/400мл, помідори чері мариновані 250/400мл, настоянка власного виробництва Вишнівка 200мл</p>
+                    <div class="product-price text-center font-bold text-xl mb-1 hidden">1 150 грн</div>
                     <button class="global-btn w-full" data-btn="Набір 4" onclick="openModal(this)">Замовити набір</button>
                 </div>
 
@@ -426,6 +802,7 @@
                     </div>
                     <h3>Набір «Особливий момент»</h3>
                     <p class="text-secondary flex-grow">Що входить: Крафтові цукерки з вишнею та горішками «Могорич» 160г, настоянка власного виробництва Вишнівка, свічка для затишку</p>
+                    <div class="product-price text-center font-bold text-xl mb-1 hidden">1 850 грн</div>
                     <button class="global-btn w-full" data-btn="Набір 5" onclick="openModal(this)">Замовити набір</button>
                 </div>
 
@@ -441,6 +818,7 @@
                     </div>
                     <h3>Набір «Домашнє тепло»</h3>
                     <p class="text-secondary flex-grow">Що входить: Мед з горішками 200мл, трав’яний чай із бутонами троянди 45г , конфітюр обліпиха з імбирем 280мл, конфітюр полуничний 280мл, конфітюр з черешні 280мл</p>
+                    <div class="product-price text-center font-bold text-xl mb-1 hidden">1 400 грн</div>
                     <button class="global-btn w-full" data-btn="Набір 6" onclick="openModal(this)">Замовити набір</button>
                 </div>
             </div>
@@ -449,34 +827,39 @@
             <div class="mt-12 p-6 border border-[#261815] rounded-[10px]">
                 <h3 class="mb-4 text-xl">Крафтовий набір</h3>
                 <p class="mb-4">Ми готові зібрати індивідуальний подарунковий набір саме під вашу компанію.<br>Ви розповідаєте нам про привід, кількість отримувачів, бюджет, дедлайн і побажання до подарунка — а ми пропонуємо варіанти наповнення, пакування та брендування.</p>
-                <details>
-                    <summary>Можемо адаптувати</summary>
-                    <ul class="list-disc pl-5 mt-3 space-y-1">
-                        <li>склад набору;</li>
-                        <li>розмір подарунка;</li>
-                        <li>бюджет за 1 набір;</li>
-                        <li>стиль пакування;</li>
-                        <li>формат брендування;</li>
-                        <li>листівку або персональне побажання;</li>
-                        <li>наповнення для різних категорій отримувачів.</li>
-                    </ul>
-                </details>
-                <details class="mb-6 border-b-0">
-                    <summary>Підійде, якщо</summary>
-                    <ul class="list-disc pl-5 mt-3 space-y-1">
-                        <li>потрібен подарунок під конкретний бюджет;</li>
-                        <li>треба зробити набір у стилі компанії;</li>
-                        <li>подарунки потрібні для різних груп отримувачів;</li>
-                        <li>важливо підготувати щось нестандартне;</li>
-                        <li>потрібен подарунок під подію, сезон або корпоративний привід.</li>
-                    </ul>
-                </details>
-                <button class="global-btn" data-btn="Крафтовий" onclick="openModal(this)">Зібрати індивідуальний набір</button>
+                
+                <div class="dark-accordion mb-6">
+                    <details>
+                        <summary><span class="accordion-title">Можемо адаптувати</span></summary>
+                        <ul class="list-disc pl-5 mt-3 space-y-1">
+                            <li>склад набору;</li>
+                            <li>розмір подарунка;</li>
+                            <li>бюджет за 1 набір;</li>
+                            <li>стиль пакування;</li>
+                            <li>формат брендування;</li>
+                            <li>листівку або персональне побажання;</li>
+                            <li>наповнення для різних категорій отримувачів.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary><span class="accordion-title">Підійде, якщо</span></summary>
+                        <ul class="list-disc pl-5 mt-3 space-y-1">
+                            <li>потрібен подарунок під конкретний бюджет;</li>
+                            <li>треба зробити набір у стилі компанії;</li>
+                            <li>подарунки потрібні для різних груп отримувачів;</li>
+                            <li>важливо підготувати щось нестандартне;</li>
+                            <li>потрібен подарунок під подію, сезон або корпоративний привід.</li>
+                        </ul>
+                    </details>
+                </div>
+                
+                <div class="product-price text-center font-bold text-xl mb-3 hidden">від 1 000 грн</div>
+                <button class="global-btn full-width-cta" data-btn="Крафтовий" onclick="openModal(this)">Зібрати індивідуальний набір</button>
             </div>
         </section>
 
         <!-- Блок 5. Подарунки наших гостей -->
-        <section class="section-margin">
+        <section class="section-margin shared-section">
             <h2 class="mb-4">Більше, ніж набір</h2>
             <p class="mb-8">Ми створюємо подарунки, які працюють не лише в момент вручення, а й після — коли людина відкриває коробку, дістає смаколики й перетворює подарунок на маленький приємний ритуал.<br>Саме тому такі набори запамʼятовують: вони дарують не формальність, а смак, атмосферу й відчуття уваги.</p>
             
@@ -494,7 +877,7 @@
         </section>
 
         <!-- Блок 6. Брендування -->
-        <section class="section-margin">
+        <section id="branding" class="section-margin shared-section">
             <h2 class="mb-4">Брендуємо подарунки під вашу компанію</h2>
             <p class="mb-8">Корпоративний подарунок має не просто виглядати красиво. Він має нагадувати про ваш бренд, цінності та увагу до людей, яким ви його даруєте.<br>Тому кожен набір можна адаптувати під вашу компанію: додати логотип, назву, корпоративні кольори, персональну листівку, брендоване пакування або інші деталі.</p>
             
@@ -511,98 +894,104 @@
                 <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
             </div>
             
-            <button class="global-btn" data-btn="Брендування" onclick="openModal(this)">Обговорити брендування</button>
+            <button class="global-btn full-width-cta" data-btn="Брендування" onclick="openModal(this)">Обговорити брендування</button>
         </section>
 
         <!-- Блок 7 -->
-        <section class="section-margin">
+        <section class="section-margin shared-section">
             <h2 class="mb-4">Що може входити в подарунковий набір</h2>
             <p class="mb-8">Ми можемо зібрати набір із готових фірмових позицій або підібрати індивідуальне наповнення під конкретну аудиторію.</p>
             
-            <details>
-                <summary>Крафтові солодощі</summary>
-                <p>Цукерки, солодкі позиції, конфітюри, мед, доповнення до чаю або інші приємні гастрономічні деталі.</p>
-            </details>
-            <details>
-                <summary>Українські делікатеси</summary>
-                <p>Позиції з характером українського столу: м’ясні делікатеси, соуси, хрін, гірчиця та інші смачні доповнення.</p>
-            </details>
-            <details>
-                <summary>Домашні соління</summary>
-                <p>Огірки, томати, гриби, перець, овочеві асорті або інші фірмові позиції для гастрономічного набору.</p>
-            </details>
-            <details>
-                <summary>Напої та доповнення</summary>
-                <p>Можемо запропонувати наповнення під формат подарунка: чайні, кавові, безалкогольні або інші позиції за погодженням.</p>
-            </details>
-            <details>
-                <summary>Фірмове пакування</summary>
-                <p>Коробки, пакети, стрічки, бірки, наліпки, листівки та інші елементи, які створюють завершений вигляд подарунка.</p>
-            </details>
-            <details>
-                <summary>Індивідуальні деталі</summary>
-                <p>Персональні побажання, різні варіанти наборів для різних груп отримувачів, окреме пакування для VIP-подарунків.</p>
-            </details>
+            <div class="dark-accordion">
+                <details>
+                    <summary><span class="accordion-title">Крафтові солодощі</span></summary>
+                    <p>Цукерки, солодкі позиції, конфітюри, мед, доповнення до чаю або інші приємні гастрономічні деталі.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Українські делікатеси</span></summary>
+                    <p>Позиції з характером українського столу: м’ясні делікатеси, соуси, хрін, гірчиця та інші смачні доповнення.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Домашні соління</span></summary>
+                    <p>Огірки, томати, гриби, перець, овочеві асорті або інші фірмові позиції для гастрономічного набору.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Напої та доповнення</span></summary>
+                    <p>Можемо запропонувати наповнення під формат подарунка: чайні, кавові, безалкогольні або інші позиції за погодженням.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Фірмове пакування</span></summary>
+                    <p>Коробки, пакети, стрічки, бірки, наліпки, листівки та інші елементи, які створюють завершений вигляд подарунка.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Індивідуальні деталі</span></summary>
+                    <p>Персональні побажання, різні варіанти наборів для різних груп отримувачів, окреме пакування для VIP-подарунків.</p>
+                </details>
+            </div>
         </section>
 
         <!-- Блок 8 -->
-        <section class="section-margin">
+        <section class="section-margin shared-section">
             <h2 class="mb-4">Від заявки до готових подарунків — усе зрозуміло й поетапно</h2>
             <p class="mb-8">Ми не продаємо набори через кошик на сайті, тому що корпоративне замовлення майже завжди потребує уточнення деталей.<br>Після заявки ми зв’язуємося з вами, уточнюємо задачу та готуємо пропозицію.</p>
             
-            <details class="mb-8 border-b border-[#261815]/20">
-                <summary>Як проходить замовлення?</summary>
-                <ol class="list-decimal pl-5 mt-4 space-y-4">
-                    <li><span class="font-semibold">Ви залишаєте заявку</span><br>Вказуєте кількість наборів, орієнтовний бюджет, привід і дату, до якої потрібні подарунки.</li>
-                    <li><span class="font-semibold">Ми уточнюємо задачу</span><br>Дізнаємося, для кого подарунки: співробітників, партнерів, клієнтів, VIP-гостей або учасників події.</li>
-                    <li><span class="font-semibold">Пропонуємо варіанти</span><br>Підбираємо готовий набір або пропонуємо індивідуальне наповнення під ваш бюджет.</li>
-                    <li><span class="font-semibold">Узгоджуємо брендування</span><br>Обговорюємо логотип, листівки, корпоративні кольори, пакування та інші деталі.</li>
-                    <li><span class="font-semibold">Готуємо прорахунок</span><br>Формуємо фінальну пропозицію з урахуванням кількості, складу набору, пакування та дедлайну.</li>
-                    <li><span class="font-semibold">Комплектуємо подарунки</span><br>Готуємо, пакуємо та перевіряємо набори перед передачею.</li>
-                    <li><span class="font-semibold">Передаємо готове замовлення або розсилаємо перевізником по всій Україні</span><br>Ви отримуєте готові подарунки для вручення співробітникам, клієнтам, партнерам чи гостям події в офіс, або ж розішлемо в потрібну точку по Україні.</li>
-                </ol>
-            </details>
+            <div class="dark-accordion mb-8">
+                <details>
+                    <summary><span class="accordion-title">Як проходить замовлення?</span></summary>
+                    <ol class="list-decimal pl-5 mt-4 space-y-4">
+                        <li><span class="font-semibold">Ви залишаєте заявку</span><br>Вказуєте кількість наборів, орієнтовний бюджет, привід і дату, до якої потрібні подарунки.</li>
+                        <li><span class="font-semibold">Ми уточнюємо задачу</span><br>Дізнаємося, для кого подарунки: співробітників, партнерів, клієнтів, VIP-гостей або учасників події.</li>
+                        <li><span class="font-semibold">Пропонуємо варіанти</span><br>Підбираємо готовий набір або пропонуємо індивідуальне наповнення під ваш бюджет.</li>
+                        <li><span class="font-semibold">Узгоджуємо брендування</span><br>Обговорюємо логотип, листівки, корпоративні кольори, пакування та інші деталі.</li>
+                        <li><span class="font-semibold">Готуємо прорахунок</span><br>Формуємо фінальну пропозицію з урахуванням кількості, складу набору, пакування та дедлайну.</li>
+                        <li><span class="font-semibold">Комплектуємо подарунки</span><br>Готуємо, пакуємо та перевіряємо набори перед передачею.</li>
+                        <li><span class="font-semibold">Передаємо готове замовлення або розсилаємо перевізником по всій Україні</span><br>Ви отримуєте готові подарунки для вручення співробітникам, клієнтам, партнерам чи гостям події в офіс, або ж розішлемо в потрібну точку по Україні.</li>
+                    </ol>
+                </details>
+            </div>
             
-            <button class="global-btn" data-btn="Заявка" onclick="openModal(this)">Залишити заявку</button>
+            <button class="global-btn full-width-cta" data-btn="Заявка" onclick="openModal(this)">Залишити заявку</button>
         </section>
 
         <!-- Блок 9. Чому «Могорич» -->
-        <section class="section-margin">
+        <section id="why-mogorich" class="section-margin shared-section">
             <h2 class="mb-4">Чому компанії обирають подарункові набори від «Могорич»</h2>
             <p class="mb-8">Ми створюємо не стандартні бокси “як у всіх”, а гастрономічні подарунки з характером, які можна адаптувати під вашу компанію, подію та аудиторію.</p>
             
-            <details>
-                <summary>Власна кухня та фірмові продукти</summary>
-                <p>В основі наборів — гастрономічні позиції від «Могорич», які передають атмосферу гостинності та щедрого столу.</p>
-            </details>
-            <details>
-                <summary>Крафтовий підхід</summary>
-                <p>Кожен набір можна зібрати не шаблонно, а під конкретний привід, бюджет і отримувачів.</p>
-            </details>
-            <details>
-                <summary>Український гастрономічний характер</summary>
-                <p>Солодощі, соління, делікатеси та фірмові позиції створюють подарунок, який відрізняється від стандартних корпоративних сувенірів.</p>
-            </details>
-            <details>
-                <summary>Брендування під компанію</summary>
-                <p>Можемо додати логотип, назву, листівку, корпоративні кольори та індивідуальні деталі.</p>
-            </details>
-            <details>
-                <summary>Готові рішення та індивідуальні набори</summary>
-                <p>Можна обрати один із готових варіантів або зібрати повністю індивідуальний подарунок.</p>
-            </details>
-            <details>
-                <summary>Підбір під бюджет</summary>
-                <p>Ми враховуємо кількість отримувачів, бажаний бюджет за один набір і пропонуємо рішення, яке відповідає вашій задачі.</p>
-            </details>
-            <details>
-                <summary>Подарунки як частина події</summary>
-                <p>Набори можна підготувати для корпоративів, конференцій, презентацій, партнерських зустрічей або інших заходів.</p>
-            </details>
+            <div class="dark-accordion">
+                <details>
+                    <summary><span class="accordion-title">Власна кухня та фірмові продукти</span></summary>
+                    <p>В основі наборів — гастрономічні позиції від «Могорич», які передають атмосферу гостинності та щедрого столу.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Крафтовий підхід</span></summary>
+                    <p>Кожен набір можна зібрати не шаблонно, а під конкретний привід, бюджет і отримувачів.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Український гастрономічний характер</span></summary>
+                    <p>Солодощі, соління, делікатеси та фірмові позиції створюють подарунок, який відрізняється від стандартних корпоративних сувенірів.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Брендування під компанію</span></summary>
+                    <p>Можемо додати логотип, назву, листівку, корпоративні кольори та індивідуальні деталі.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Готові рішення та індивідуальні набори</span></summary>
+                    <p>Можна обрати один із готових варіантів або зібрати повністю індивідуальний подарунок.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Підбір під бюджет</span></summary>
+                    <p>Ми враховуємо кількість отримувачів, бажаний бюджет за один набір і пропонуємо рішення, яке відповідає вашій задачі.</p>
+                </details>
+                <details>
+                    <summary><span class="accordion-title">Подарунки як частина події</span></summary>
+                    <p>Набори можна підготувати для корпоративів, конференцій, презентацій, партнерських зустрічей або інших заходів.</p>
+                </details>
+            </div>
         </section>
         
         <!-- БЛОК 10. Нам довіряють -->
-        <section class="section-margin">
+        <section id="trusted" class="section-margin shared-section">
             <h2 class="mb-8">Нам довіряють</h2>
             <div class="logo-marquee">
                 <div class="logo-marquee-track">
@@ -631,43 +1020,43 @@
         </section>
 
         <!-- Блок 11. FAQ -->
-        <section class="section-margin">
+        <section class="section-margin shared-section faq-section">
             <h2 class="mb-8">Часті питання</h2>
             
             <details>
-                <summary>Чи можна купити набір одразу на сайті?</summary>
+                <summary><span class="faq-question">Чи можна купити набір одразу на сайті?</span></summary>
                 <p>Ні. Ми працюємо через заявку, тому що корпоративні подарунки зазвичай потребують індивідуального прорахунку: кількості, складу, бюджету, дедлайну та брендування.</p>
             </details>
             <details>
-                <summary>Чи можна замовити набір із логотипом компанії?</summary>
+                <summary><span class="faq-question">Чи можна замовити набір із логотипом компанії?</span></summary>
                 <p>Так. Ми можемо додати логотип, назву компанії, брендовану листівку, наліпку, бірку, печатки, корпоративні кольори або інші елементи оформлення.</p>
             </details>
             <details>
-                <summary>Чи можна зібрати індивідуальний набір?</summary>
+                <summary><span class="faq-question">Чи можна зібрати індивідуальний набір?</span></summary>
                 <p>Так. Якщо готові варіанти вам не підходять, ми можемо зібрати крафтовий набір під вашу компанію, привід, бюджет і кількість отримувачів.</p>
             </details>
             <details>
-                <summary>Чи можна зробити різні набори для різних людей?</summary>
+                <summary><span class="faq-question">Чи можна зробити різні набори для різних людей?</span></summary>
                 <p>Так. Наприклад, окремі подарунки для співробітників, партнерів, VIP-клієнтів або гостей події.</p>
             </details>
             <details>
-                <summary>Від чого залежить вартість набору?</summary>
+                <summary><span class="faq-question">Від чого залежить вартість набору?</span></summary>
                 <p>Вартість залежить від наповнення, кількості наборів, пакування, брендування та додаткових побажань.</p>
             </details>
             <details>
-                <summary>Чи можна підібрати набір під конкретний бюджет?</summary>
+                <summary><span class="faq-question">Чи можна підібрати набір під конкретний бюджет?</span></summary>
                 <p>Так. Ви можете вказати орієнтовний бюджет за один набір, а ми запропонуємо варіанти наповнення в межах цього бюджету.</p>
             </details>
             <details>
-                <summary>Скільки часу потрібно на підготовку замовлення?</summary>
+                <summary><span class="faq-question">Скільки часу потрібно на підготовку замовлення?</span></summary>
                 <p>Термін залежить від кількості наборів, складності наповнення та брендування. Після заявки ми уточнимо деталі й зорієнтуємо вас по реальних строках.</p>
             </details>
             <details>
-                <summary>Чи можна додати персональну листівку?</summary>
+                <summary><span class="faq-question">Чи можна додати персональну листівку?</span></summary>
                 <p>Так. Ми можемо додати листівку з вашим текстом, привітанням або персональним повідомленням для отримувачів.</p>
             </details>
             <details>
-                <summary>Чи можна замовити подарунки для події?</summary>
+                <summary><span class="faq-question">Чи можна замовити подарунки для події?</span></summary>
                 <p>Так. Ми можемо підготувати набори для корпоративу, конференції, презентації, партнерської зустрічі або іншого заходу.</p>
             </details>
         </section>
@@ -696,8 +1085,8 @@
     </section>
 
     <!-- Футер -->
-    <footer class="bg-white text-[#261815] py-8 border-t border-[#261815]/20">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6">
+    <footer class="site-footer">
+        <div class="footer-content max-w-6xl mx-auto px-4">
             <div>
                 <p class="font-semibold mb-2">Соціальні мережі:</p>
                 <a href="#" class="hover:underline">Instagram: mogorich_ivent</a>
@@ -711,6 +1100,9 @@
                 <p class="font-semibold mb-2">Адреса:</p>
                 <p>Чернігівська область, Ніжинський район,<br>с. Вертіївка, вул. Київська, будинок 1</p>
             </div>
+        </div>
+        <div class="footer-logo">
+            <img src="logo_footer.png" alt="Могорич">
         </div>
     </footer>
 
@@ -755,11 +1147,52 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></script> <!-- Required for tailwind to not strip it -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></script> 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     
     <script>
+        // === PRICE LOGIC (A/B Testing) ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const isPriceMode = window.location.search.includes('price=true') || window.location.pathname.endsWith('/price');
+            if (isPriceMode) {
+                document.querySelectorAll('.product-price').forEach(el => el.classList.remove('hidden'));
+            }
+        });
+
+        // === MOBILE MENU LOGIC ===
+        const burgerButton = document.querySelector(".burger-button");
+        const mobileNavigation = document.querySelector(".mobile-navigation");
+        const siteNavigation = document.querySelector(".site-navigation");
+
+        function closeMobileMenu() {
+            if(mobileNavigation) mobileNavigation.classList.remove("is-open");
+            if(burgerButton) burgerButton.setAttribute("aria-expanded", "false");
+        }
+
+        if(burgerButton) {
+            burgerButton.addEventListener("click", () => {
+                const isOpen = mobileNavigation.classList.toggle("is-open");
+                burgerButton.setAttribute("aria-expanded", String(isOpen));
+            });
+        }
+
+        if(mobileNavigation) {
+            mobileNavigation.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", closeMobileMenu);
+            });
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") closeMobileMenu();
+        });
+
+        document.addEventListener("click", (event) => {
+            if (siteNavigation && !siteNavigation.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+
         // === APP CONFIG ===
         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_WEB_APP_URL';
         
@@ -812,14 +1245,11 @@
         const modalContent = document.getElementById('modalContent');
         
         function openModal(buttonElement) {
-            // Get which button was clicked
             const btnType = buttonElement.getAttribute('data-btn') || 'Заявка';
             document.getElementById('btn_type').value = btnType;
             
-            // FB Pixel
             if(typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
             
-            // UI
             document.getElementById('formState').classList.remove('hidden');
             document.getElementById('thanksState').classList.add('hidden');
             document.getElementById('phoneError').classList.add('hidden');
@@ -848,7 +1278,6 @@
             const phoneError = document.getElementById('phoneError');
             const submitBtn = document.getElementById('submitBtn');
             
-            // Validate Phone
             if (!iti.isValidNumber()) {
                 phoneInput.classList.add('border-red-500');
                 phoneError.classList.remove('hidden');
@@ -857,12 +1286,10 @@
             phoneInput.classList.remove('border-red-500');
             phoneError.classList.add('hidden');
 
-            // Block Button
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Відправка...';
             submitBtn.disabled = true;
 
-            // Prepare Data
             const payload = {
                 date: new Date().toLocaleString("uk-UA", {timeZone: "Europe/Kiev"}),
                 name: document.getElementById('name').value,
@@ -873,18 +1300,15 @@
             };
 
             try {
-                // Send to Google Sheets
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important for Google Script Web Apps
+                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
-                // Success FB Pixel
                 if(typeof fbq !== 'undefined') fbq('track', 'Lead');
 
-                // Show Thanks Screen
                 document.getElementById('formState').classList.add('hidden');
                 document.getElementById('thanksState').classList.remove('hidden');
                 
@@ -897,4 +1321,4 @@
         }
     </script>
 </body>
-</html>
+</html>F
